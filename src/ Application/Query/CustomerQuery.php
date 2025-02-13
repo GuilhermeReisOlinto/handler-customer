@@ -42,7 +42,9 @@ class CustomerQuery
             throw new Exception("Error in prepare consult query");
         }
 
-        $stmt->execute([$documentNumber]);
+        $stmt->execute([
+            ':document_number' => $documentNumber
+        ]);
 
         var_dump($stmt);
     }
