@@ -2,10 +2,11 @@
 
 namespace App\Application\Command;
 
+use App\Application\Interfaces\CustomerCommandImpl;
 use App\Infrastructure\DataBase\PostgresConnectionFactory;
 use PDO;
 
-class CustomerCommand
+class CustomerCommand implements CustomerCommandImpl
 {
     private PDO $connect;
 
@@ -17,6 +18,7 @@ class CustomerCommand
 
     public function save($customerData): string
     {
+        var_dump($customerData);
         $sql = "INSERT INTO data_customer (name, document_number, nacionality, type_document, date_birth) 
         VALUES (:name, :document_number, :nacionality, :type_document, :type_document, :date_birth) RETURNING data_customer_id";
 
