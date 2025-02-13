@@ -27,9 +27,11 @@ class CustomerInController
 
             $bodyRequest = $request->getBody();
             $payload = json_decode($bodyRequest, true);
-            $this->repository->save($payload);
+            $resp = $this->repository->save($payload);
 
-            return;
+            var_dump($resp);
+            return $response->withHeader('Content-Type', 'application/json')
+                ->withStatus(201);
         });
     }
 }

@@ -18,16 +18,16 @@ class CustomerCommand implements CustomerCommandImpl
 
     public function save($customerData): string
     {
-        var_dump($customerData);
-        $sql = "INSERT INTO data_customer (name, document_number, nacionality, type_document, date_birth) 
-        VALUES (:name, :document_number, :nacionality, :type_document, :type_document, :date_birth) RETURNING data_customer_id";
+
+        $sql = "INSERT INTO data_customer (name, document_number, nationality, type_document, date_birth) 
+        VALUES (:name, :document_number, :nationality,:type_document, :date_birth) RETURNING data_customer_id";
 
         $stmt = $this->connect->prepare($sql);
 
         $stmt->execute([
             ':name'            => $customerData['name'],
             ':document_number' => $customerData['document_number'],
-            ':nacionality'     => $customerData['nacionality'],
+            ':nationality'     => $customerData['nationality'],
             ':type_document'   => $customerData['type_document'],
             ':date_birth'      => $customerData['date_birth'],
         ]);
