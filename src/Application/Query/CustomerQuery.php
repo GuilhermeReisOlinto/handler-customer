@@ -2,11 +2,12 @@
 
 namespace App\Application\Query;
 
+use App\Application\Interfaces\CustomerQueryImpl;
 use App\Infrastructure\DataBase\PostgresConnectionFactory;
 use Exception;
 use PDO;
 
-class CustomerQuery
+class CustomerQuery implements CustomerQueryImpl
 {
     private PDO $connect;
 
@@ -28,12 +29,11 @@ class CustomerQuery
 
         $stmt->execute();
 
-        var_dump($stmt);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
     public function findByDocNumber(string $documentNumber)
     {
-
         $sql = "SELECT * FROM data_customer WHERE document_number = :documentNumber";
 
         $stmt = $this->connect->prepare($sql);
@@ -43,9 +43,9 @@ class CustomerQuery
         }
 
         $stmt->execute([
-            ':document_number' => $documentNumber
+            ':documentNumber' => $documentNumber
         ]);
 
-        var_dump($stmt);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 }

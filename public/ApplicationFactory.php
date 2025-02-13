@@ -1,6 +1,7 @@
 <?php
 
 use App\Application\Factories\CustomerCommandFactory;
+use App\Application\Query\CustomerQueryFactory;
 use App\Infrastructure\Frameworks\Controllers\CustomerInController;
 use Slim\App;
 use Slim\Factory\AppFactory;
@@ -22,7 +23,8 @@ class ApplicationFactory
 
     public static function createDependeciesController(): CustomerInController
     {
-        $repository = new CustomerCommandFactory();
-        return new CustomerInController($repository);
+        $commandRepository = new CustomerCommandFactory();
+        $queryRepository = new CustomerQueryFactory();
+        return new CustomerInController($commandRepository, $queryRepository);
     }
 }
