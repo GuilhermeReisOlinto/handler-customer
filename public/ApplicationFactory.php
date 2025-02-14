@@ -12,7 +12,7 @@ class ApplicationFactory
     {
         $app = AppFactory::create();
 
-        $app->addRoutingMiddleware(); // Adiciona suporte ao roteamento
+        $app->addRoutingMiddleware();
         $app->addErrorMiddleware(true, true, true);
 
         $controller = self::createDependeciesController();
