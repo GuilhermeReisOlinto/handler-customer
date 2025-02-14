@@ -17,8 +17,6 @@ class PostgresConnection implements PostgresConnectionImpl
         $this->connect = new PDO($dsn, $user, $password);
 
         $this->connect->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-
-        var_dump($this->connect);
     }
 
     public function getConnection(): PDO
