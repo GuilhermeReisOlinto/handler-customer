@@ -5,7 +5,7 @@ namespace App\Infrastructure\Frameworks\Controllers;
 use App\Application\Factories\CustomerCommandFactory;
 use App\Application\Interfaces\CustomerCommandImpl;
 use App\Application\Interfaces\CustomerQueryImpl;
-use App\Application\Query\CustomerQueryFactory;
+use App\Application\Factories\CustomerQueryFactory;
 use Slim\Psr7\Request;
 use Slim\Psr7\Response;
 

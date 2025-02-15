@@ -1,8 +1,9 @@
 <?php
 
-namespace App\Application\Query;
+namespace App\Application\Factories;
 
 use App\Application\Interfaces\CustomerQueryImpl;
+use App\Application\Query\CustomerQuery;
 use App\Infrastructure\DataBase\PostgresConnectionFactory;
 
 class CustomerQueryFactory
