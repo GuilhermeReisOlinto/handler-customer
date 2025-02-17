@@ -38,9 +38,12 @@ class HandlerSaveService implements HandlerSaveServiceImpl
 
         $responseRepository = $this->commandRepository->save($payload['customer_info']);
 
-        if ($responseRepository) {
-            $this->saveContactInfo($payload['customer_contact_info']);
+        if (!$responseRepository) {
+            return $message = 'Not create customer, rollback execute';
         }
+
+        $this->saveContactInfo($payload['customer_contact_info'], $responseRepository);
+        $this->saveLocalizationInfo($payload['customer_localization_info'], $responseRepository);
     }
 
     private function validDocumentNumber(string $documentNumber)
@@ -48,8 +51,17 @@ class HandlerSaveService implements HandlerSaveServiceImpl
         return $this->queryRepository->findByDocNumber($documentNumber);
     }
 
-    private function saveContactInfo($contactInfo)
+    private function saveContactInfo($contactInfo, string $responseRepository)
     {
+        $contactInfo['data_customer_id'] = $responseRepository;
+
         $this->commandContactRepository->save($contactInfo);
+    }
+
+    private function saveLocalizationInfo($localizationInfo, string $responseRepository)
+    {
+        $localizationInfo['data_customer_id'] = $responseRepository;
+
+        $this->commandContactRepository->saveLocalizations($localizationInfo);
     }
 }
