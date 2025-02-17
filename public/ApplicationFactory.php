@@ -1,7 +1,7 @@
 <?php
 
 use App\Application\Factories\CustomerCommandFactory;
-use App\Application\Query\CustomerQueryFactory;
+use App\Application\Factories\CustomerQueryFactory;
 use App\Infrastructure\Frameworks\Controllers\CustomerInController;
 use Slim\App;
 use Slim\Factory\AppFactory;
