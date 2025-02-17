@@ -9,7 +9,8 @@ class CustomerServicesFactory
 {
     public static function create(): HandlerSaveServiceImpl
     {
-        $command = new CustomerCommandFactory;
-        return new HandlerSaveService($command);
+        $command = new CustomerCommandFactory();
+        $query = new CustomerQueryFactory();
+        return new HandlerSaveService($command, $query);
     }
 }
