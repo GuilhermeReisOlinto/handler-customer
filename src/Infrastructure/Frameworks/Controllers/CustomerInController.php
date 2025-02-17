@@ -8,6 +8,8 @@ use App\Application\Interfaces\CustomerQueryImpl;
 use App\Application\Factories\CustomerQueryFactory;
 use App\Application\Factories\CustomerServicesFactory;
 use App\Application\Interfaces\HandlerSaveServiceImpl;
+use Slim\Exception\HttpException;
+use Slim\Exception\HttpNotFoundException;
 use Slim\Psr7\Request;
 use Slim\Psr7\Response;
 
@@ -37,8 +39,9 @@ class CustomerInController
             $payload = json_decode($bodyRequest, true);
             $serviceResp = $this->service->handler($payload);
 
-
             var_dump($serviceResp);
+            // throw new HttpNotFoundException($request, 'Error aqui');
+            // throw new HttpException($request, 'Congflito', 409);
             return $response->withHeader('Content-Type', 'application/json')
                 ->withStatus(201);
         });
