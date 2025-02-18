@@ -6,20 +6,24 @@ use App\Application\Factories\CustomerCommandFactory;
 use App\Application\Interfaces\CustomerCommandImpl;
 use App\Application\Interfaces\CustomerQueryImpl;
 use App\Application\Factories\CustomerQueryFactory;
+use App\Application\Factories\CustomerServicesFactory;
+use App\Application\Interfaces\HandlerSaveServiceImpl;
+use Slim\Exception\HttpException;
+use Slim\Exception\HttpNotFoundException;
 use Slim\Psr7\Request;
 use Slim\Psr7\Response;
 
 class CustomerInController
 {
-    private CustomerCommandImpl $commandRepository;
     private CustomerQueryImpl $queryRepository;
+    private HandlerSaveServiceImpl $service;
 
     public function __construct(
-        private readonly CustomerCommandFactory $customerCommand,
-        private readonly CustomerQueryFactory $customerQuery
+        private readonly CustomerQueryFactory $customerQuery,
+        private readonly CustomerServicesFactory $customerService
     ) {
-        $this->commandRepository = $customerCommand::create();
         $this->queryRepository = $customerQuery::create();
+        $this->service = $customerService::create();
     }
 
     public function registerRoutes($app)
@@ -33,9 +37,11 @@ class CustomerInController
 
             $bodyRequest = $request->getBody();
             $payload = json_decode($bodyRequest, true);
-            $resp = $this->commandRepository->save($payload);
+            $serviceResp = $this->service->handler($payload);
 
-            var_dump($resp);
+            var_dump($serviceResp);
+            // throw new HttpNotFoundException($request, 'Error aqui');
+            // throw new HttpException($request, 'Congflito', 409);
             return $response->withHeader('Content-Type', 'application/json')
                 ->withStatus(201);
         });
