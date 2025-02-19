@@ -17,7 +17,7 @@ class ConfigKafkaMessageBroker
         $this->topic = $produce->newTopic('Customer-created');
     }
 
-    public function topic()
+    public function getTopic()
     {
         return $this->topic;
     }
