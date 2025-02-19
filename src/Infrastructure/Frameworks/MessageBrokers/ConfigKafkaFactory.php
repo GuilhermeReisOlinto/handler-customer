@@ -1,8 +1,6 @@
 <?php
 
-namespace App\Infrastructure\Factories;
-
-use App\Infrastructure\Frameworks\MessageBrokers;
+namespace App\Infrastructure\Frameworks\MessageBrokers;
 
 class ConfigKafkaFactory
 {
