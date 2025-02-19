@@ -2,9 +2,10 @@
 
 namespace App\Infrastructure\Frameworks\MessageBrokers;
 
+use App\Infrastructure\Interfaces\ConfigKafkaImpl;
 use RdKafka;
 
-class ConfigKafkaMessageBroker
+class ConfigKafkaMessageBroker implements ConfigKafkaImpl
 {
     private $topic;
     private $produce;
@@ -14,8 +15,8 @@ class ConfigKafkaMessageBroker
         $conf = new RdKafka\Conf();
         $conf->set($key, $host);
 
-        $this->produce = new Producer($conf);
-        $this->topic = $produce->newTopic('Customer-created');
+        $this->produce = new RdKafka\Producer($conf);
+        $this->topic = $this->produce->newTopic('Customer-created');
     }
 
     public function getTopic()
@@ -25,7 +26,7 @@ class ConfigKafkaMessageBroker
 
     public function sendMessage($message)
     {
-        $this->topic->produce(RD_KAFKA_PARTITION_UA, 0, json_encode($message));
+        $this->topic->produce(RD_KAFKA_PARTITION_UA, 0, json_encode('deu muito bom '));
         $this->produce->poll(0);
     }
     

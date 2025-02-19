@@ -8,6 +8,7 @@ use App\Application\Interfaces\ContactInfoCommandImpl;
 use App\Application\Interfaces\CustomerCommandImpl;
 use App\Application\Interfaces\CustomerQueryImpl;
 use App\Application\Interfaces\HandlerSaveServiceImpl;
+use App\Infrastructure\Frameworks\MessageBrokers\ConfigKafkaFactory;
 use App\Infrastructure\Interfaces\ConfigKafkaImpl;
 
 class HandlerSaveService implements HandlerSaveServiceImpl
@@ -20,7 +21,7 @@ class HandlerSaveService implements HandlerSaveServiceImpl
     public function __construct(
         private readonly CustomerCommandFactory $customerCommand,
         private readonly CustomerQueryFactory $customerQuery,
-        private readonly ConfigKafkaImpl $configKafka,
+        private readonly ConfigKafkaFactory $configKafka,
     ) {
         $this->commandRepository = $customerCommand::create();
         $this->queryRepository = $customerQuery::create();
