@@ -19,8 +19,8 @@ class ContactInfoCommand implements ContactInfoCommandImpl
     public function save($dataContact): void
     {
         $sql = "INSERT INTO customer_contact_info 
-        (phone_number, phone_number_alternative, email, email_alternative, fathers_name, fathers_phone, mothers_name, mothers_phone, data_customer_id)
-        VALUES (:phone_number, :phone_number_alternative, :email, :email_alternative, :fathers_name, :fathers_phone, :mothers_name, :mothers_phone, :data_customer_id)";
+        (phone_number, phone_number_alternative, email, email_alternative, fathers_name, fathers_phone, mothers_name, mothers_phone, customer_id)
+        VALUES (:phone_number, :phone_number_alternative, :email, :email_alternative, :fathers_name, :fathers_phone, :mothers_name, :mothers_phone, :customer_id)";
 
         $stmt = $this->connect->prepare($sql);
 
@@ -33,27 +33,27 @@ class ContactInfoCommand implements ContactInfoCommandImpl
             ":fathers_phone"            => $dataContact['fathers_phone'],
             ":mothers_name"             => $dataContact['mothers_name'],
             ":mothers_phone"            => $dataContact['mothers_phone'],
-            ":data_customer_id"         => $dataContact['data_customer_id']
+            ":customer_id"         => $dataContact['customer_id']
         ]);
     }
 
     public function saveLocalizations($dataContact): void
     {
         $sql = "INSERT INTO customer_localization_info 
-        (street, city, state, country, zip_code, number_house, complement, data_customer_id)
-        VALUES (:street, :city, :state, :country, :zip_code, :number_house, :complement, :data_customer_id)";
+        (street, city, state, country, zip_code, number_house, complement, customer_id)
+        VALUES (:street, :city, :state, :country, :zip_code, :number_house, :complement, :customer_id)";
 
         $stmt = $this->connect->prepare($sql);
 
         $stmt->execute([
-            ":street"             => $dataContact['street'],
-            ":city" => $dataContact['city'],
-            ":state"                    => $dataContact['state'],
-            ":country"        => $dataContact['country'],
-            ":zip_code"             => $dataContact['zip_code'],
-            ":number_house"            => $dataContact['number_house'],
-            ":complement"             => $dataContact['complement'],
-            ":data_customer_id"         => $dataContact['data_customer_id']
+            ":street"       => $dataContact['street'],
+            ":city"         => $dataContact['city'],
+            ":state"        => $dataContact['state'],
+            ":country"      => $dataContact['country'],
+            ":zip_code"     => $dataContact['zip_code'],
+            ":number_house" => $dataContact['number_house'],
+            ":complement"   => $dataContact['complement'],
+            ":customer_id"  => $dataContact['customer_id']
         ]);
     }
 }
