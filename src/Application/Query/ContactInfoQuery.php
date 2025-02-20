@@ -19,7 +19,7 @@ class ContactInfoQuery implements ContactInfoQueryImpl
 
     public function findByIdCustomer(string $id)
     {
-        $sql = "SELECT * FROM customer_contact_info WHERE data_customer_id = :id";
+        $sql = "SELECT * FROM customer_contact_info WHERE customer_id = :id";
 
         $stmt = $this->connect->prepare($sql);
 

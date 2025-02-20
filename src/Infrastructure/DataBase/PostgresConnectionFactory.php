@@ -9,7 +9,7 @@ class PostgresConnectionFactory
 
     public static function create(): PostgresConnectionImpl
     {
-        $dsn = 'pgsql:host=localhost;port=5432;dbname=postgres';
+        $dsn = 'pgsql:host=localhost;port=5432;dbname=customers';
         $password = 'postgres';
         $user = 'postgres';
 
