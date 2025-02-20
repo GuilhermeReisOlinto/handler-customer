@@ -4,6 +4,7 @@ namespace App\Application\Factories;
 
 use App\Application\Interfaces\HandlerSaveServiceImpl;
 use App\Application\Services\HandlerSaveService;
+use App\Infrastructure\Frameworks\MessageBrokers\ConfigKafkaFactory;
 
 class CustomerServicesFactory
 {
@@ -11,6 +12,8 @@ class CustomerServicesFactory
     {
         $command = new CustomerCommandFactory();
         $query = new CustomerQueryFactory();
-        return new HandlerSaveService($command, $query);
+        $kafka = new ConfigKafkaFactory();
+
+        return new HandlerSaveService($command, $query, $kafka);
     }
 }

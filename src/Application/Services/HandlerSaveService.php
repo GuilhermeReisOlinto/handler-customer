@@ -8,20 +8,25 @@ use App\Application\Interfaces\ContactInfoCommandImpl;
 use App\Application\Interfaces\CustomerCommandImpl;
 use App\Application\Interfaces\CustomerQueryImpl;
 use App\Application\Interfaces\HandlerSaveServiceImpl;
+use App\Infrastructure\Frameworks\MessageBrokers\ConfigKafkaFactory;
+use App\Infrastructure\Interfaces\ConfigKafkaImpl;
 
 class HandlerSaveService implements HandlerSaveServiceImpl
 {
     private CustomerCommandImpl $commandRepository;
     private CustomerQueryImpl $queryRepository;
     private ContactInfoCommandImpl $commandContactRepository;
+    private ConfigKafkaImpl $topicKafka;
 
     public function __construct(
         private readonly CustomerCommandFactory $customerCommand,
-        private readonly CustomerQueryFactory $customerQuery
+        private readonly CustomerQueryFactory $customerQuery,
+        private readonly ConfigKafkaFactory $configKafka,
     ) {
         $this->commandRepository = $customerCommand::create();
         $this->queryRepository = $customerQuery::create();
         $this->commandContactRepository = $customerCommand::createContact();
+        $this->topicKafka = $configKafka::create();
     }
 
     public function handler($payload)
@@ -44,6 +49,9 @@ class HandlerSaveService implements HandlerSaveServiceImpl
 
         $this->saveContactInfo($payload['customer_contact_info'], $responseRepository);
         $this->saveLocalizationInfo($payload['customer_localization_info'], $responseRepository);
+
+        $this->topicKafka->sendMessage('enviar o que for necessario para o kafka');
+
     }
 
     private function validDocumentNumber(string $documentNumber)
