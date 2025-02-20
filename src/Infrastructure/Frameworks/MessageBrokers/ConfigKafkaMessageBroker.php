@@ -26,7 +26,7 @@ class ConfigKafkaMessageBroker implements ConfigKafkaImpl
 
     public function sendMessage($message)
     {
-        $this->topic->produce(RD_KAFKA_PARTITION_UA, 0, json_encode('deu muito bom '));
+        $this->topic->produce(RD_KAFKA_PARTITION_UA, 0, json_encode($message));
         $this->produce->poll(0);
     }
     
