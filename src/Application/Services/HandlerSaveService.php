@@ -61,14 +61,14 @@ class HandlerSaveService implements HandlerSaveServiceImpl
 
     private function saveContactInfo($contactInfo, string $responseRepository)
     {
-        $contactInfo['data_customer_id'] = $responseRepository;
+        $contactInfo['customer_id'] = $responseRepository;
 
         $this->commandContactRepository->save($contactInfo);
     }
 
     private function saveLocalizationInfo($localizationInfo, string $responseRepository)
     {
-        $localizationInfo['data_customer_id'] = $responseRepository;
+        $localizationInfo['customer_id'] = $responseRepository;
 
         $this->commandContactRepository->saveLocalizations($localizationInfo);
     }

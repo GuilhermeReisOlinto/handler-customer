@@ -22,8 +22,8 @@ class CustomerCommand implements CustomerCommandImpl
         try {
             $this->connect->beginTransaction();
 
-            $sql = "INSERT INTO data_customer (name, document_number, nationality, type_document, date_birth) 
-            VALUES (:name, :document_number, :nationality,:type_document, :date_birth) RETURNING data_customer_id";
+            $sql = "INSERT INTO customer_data (name, document_number, nationality, type_document, date_birth) 
+            VALUES (:name, :document_number, :nationality,:type_document, :date_birth) RETURNING customer_id";
 
             $stmt = $this->connect->prepare($sql);
 
@@ -45,7 +45,7 @@ class CustomerCommand implements CustomerCommandImpl
                 'type'  => get_class($e),
                 'message' => $e->getMessage(),
                 'code' => $e->getCode()
-            ];;
+            ];
         }
     }
 }

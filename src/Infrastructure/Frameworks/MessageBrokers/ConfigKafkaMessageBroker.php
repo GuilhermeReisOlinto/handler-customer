@@ -30,7 +30,7 @@ class ConfigKafkaMessageBroker implements ConfigKafkaImpl
         $this->produce->poll(0);
     }
     
-    private function __destruct()
+    public function __destruct()
     {
         $this->produce->flush(1000);
     }

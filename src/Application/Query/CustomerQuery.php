@@ -19,7 +19,7 @@ class CustomerQuery implements CustomerQueryImpl
 
     public function show()
     {
-        $sql = "SELECT * FROM data_customer";
+        $sql = "SELECT * FROM customer_data";
 
         $stmt = $this->connect->prepare($sql);
 
@@ -34,7 +34,7 @@ class CustomerQuery implements CustomerQueryImpl
 
     public function findByDocNumber(string $documentNumber)
     {
-        $sql = "SELECT * FROM data_customer WHERE document_number = :documentNumber";
+        $sql = "SELECT * FROM customer_data WHERE document_number = :documentNumber";
 
         $stmt = $this->connect->prepare($sql);
 
