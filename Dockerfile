@@ -7,10 +7,10 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
-    libpq-dev \  # Dependência para PostgreSQL
-    librdkafka-dev \  # Dependência para RdKafka
+    libpq-dev \
+    librdkafka-dev \
     && docker-php-ext-install \
-    pdo_pgsql \  # Extensão para PostgreSQL
+    pdo_pgsql \
     mbstring \
     exif \
     pcntl \
