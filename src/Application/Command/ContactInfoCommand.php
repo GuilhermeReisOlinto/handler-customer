@@ -33,7 +33,7 @@ class ContactInfoCommand implements ContactInfoCommandImpl
             ":fathers_phone"            => $dataContact['fathers_phone'],
             ":mothers_name"             => $dataContact['mothers_name'],
             ":mothers_phone"            => $dataContact['mothers_phone'],
-            ":customer_id"         => $dataContact['customer_id']
+            ":customer_id"              => $dataContact['customer_id']
         ]);
     }
 
