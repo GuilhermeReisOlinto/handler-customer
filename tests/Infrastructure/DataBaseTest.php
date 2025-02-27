@@ -1,6 +1,6 @@
 <?php
 
-namespace Test\Infrastructure\DataBase;
+namespace Test\Infrastructure;
 
 use App\Infrastructure\DataBase\PostgresConnection;
 use PDOException;
@@ -22,13 +22,8 @@ class DataBaseTest extends TestCase
 
             $this->assertInstanceOf(PDO::class, $connect); 
             $this->assertTrue($connect->query('SELECT 1')->fetchColumn() === 1);
-        
         } catch (PDOException $e) {
             $this->fail('Fail in conect database', $e->getMessage());
         }
-    }
-    public function testTrueIsTrue()
-    {
-        $this->assertTrue(true);
     }
 }
